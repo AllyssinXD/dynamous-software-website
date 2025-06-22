@@ -1,0 +1,22 @@
+
+.list{
+        transition: 0.5s;
+}
+.list:has(.item-0:hover){
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+}
+
+.list:has(.item-1:hover){
+    grid-template-columns: 0.8fr 1.2fr 0.8fr;
+}
+
+.list:has(.item-2:hover){
+    grid-template-columns: 0.8fr 0.8fr 1.2fr;
+}
+
+@media (min-width: 600px) {
+    .list{
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+    }
+}

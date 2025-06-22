@@ -1,15 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "./components/Navbar/Navbar";
+import {
+  ThemeContext,
+  ThemeController,
+  ThemeProvider,
+} from "./components/ThemeController/ThemeController";
+import AppProvider from "./components/ThemeController/AppController";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const axiformaRegular = localFont({
+  src: [
+    {
+      path: "./fonts/axiforma-light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/axiforma-regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/axiforma-semi-bold.otf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-axiforma",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +42,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${axiformaRegular.className} antialiased`}>
+        <AppProvider>
+          <ThemeProvider>
+            <ThemeController>
+              <Navbar />
+              {children}
+            </ThemeController>
+          </ThemeProvider>
+        </AppProvider>
       </body>
     </html>
   );
