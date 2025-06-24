@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import Image from "next/image";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { ThemeContext } from "../ThemeController/ThemeController";
-import useWindowWidth from "@/app/hooks/useWindowWidth";
+import useWindowWidth from "@/hooks/useWindowWidth";
 import { AppContext } from "../ThemeController/AppController";
 
 export default function Navbar() {

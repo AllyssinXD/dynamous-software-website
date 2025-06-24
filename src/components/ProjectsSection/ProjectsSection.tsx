@@ -4,7 +4,7 @@ import Link from "next/link";
 import Carrosel from "../Basics/Carrosel";
 import SimpleSectionRoot from "../Basics/SimpleSectionRoot";
 import Image from "next/image";
-import useWindowWidth from "@/app/hooks/useWindowWidth";
+import useWindowWidth from "@/hooks/useWindowWidth";
 
 function ProjectsSection() {
   const innerWidth = useWindowWidth();
@@ -33,17 +33,21 @@ function ProjectsSection() {
     <Link key={i} href={project.link}>
       <div
         style={{
-          background: `url(${project.imgSrc})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "80%",
-          backgroundPosition: "center",
           width:
             innerWidth < 600
               ? "calc(" + innerWidth + "px - (var(--spacing) * 4))"
               : "",
         }}
-        className={`hover:scale-125 transition shadow-[0px_0px_10px_0px] shadow-complementary hover:cursor-pointer rounded-xl  md:h-[400px] flex items-end h-72 md:w-full overflow-hidden`}
-      ></div>
+        className={`hover:scale-110 bg-background transition flex items-center justify-center shadow-[0px_0px_5px_0px] shadow-complementary hover:cursor-pointer rounded-xl  md:h-[400px] flex h-72 w-[] md:w-full overflow-hidden`}
+      >
+        <Image
+          className="w-2/3"
+          alt={project.label}
+          width={1200}
+          height={500}
+          src={project.imgSrc}
+        />
+      </div>
     </Link>
   ));
 
@@ -54,7 +58,7 @@ function ProjectsSection() {
     >
       <Carrosel
         items={projectsElements}
-        listClass="md:grid transition grid-cols-3"
+        listClass="flex md:grid transition grid-cols-3 md:p-10"
       />
     </SimpleSectionRoot>
   );

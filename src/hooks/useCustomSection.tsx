@@ -1,29 +1,26 @@
+import SectionSubtitle from "@/components/Basics/SectionSubtitle";
+import SectionTitle from "@/components/Basics/SectionTitle";
 import { ReactElement, ReactNode, useId } from "react";
-import SectionTitle from "./SectionTitle";
-import SectionSubtitle from "./SectionSubtitle";
 
-function SectionRoot({
-  title,
-  subtitle,
-  children,
-  containerClass,
-  className,
-}: {
-  title?: string;
-  subtitle?: string;
-  children: ReactNode;
-  containerClass?: string;
-  className?: string;
-}): {
-  element: ReactElement;
-  getIDS: () => { subtitle: string; title: string };
-} {
-  const baseID = useId(); // <- apenas uma chamada aqui
+export function useCustomSection() {
+  const baseID = useId();
   const titleID = `${baseID}-title`;
   const subtitleID = `${baseID}-subtitle`;
 
-  return {
-    element: (
+  function createSectionRoot({
+    title,
+    subtitle,
+    children,
+    containerClass,
+    className,
+  }: {
+    title?: string;
+    subtitle?: string;
+    children: ReactNode;
+    containerClass?: string;
+    className?: string;
+  }): ReactElement {
+    return (
       <section
         className={className + " bg-background min-h-96"}
         aria-labelledby={titleID}
@@ -38,11 +35,12 @@ function SectionRoot({
           {children}
         </div>
       </section>
-    ),
-    getIDS() {
-      return { title: titleID, subtitle: subtitleID };
-    },
+    );
+  }
+
+  return {
+    titleID,
+    subtitleID,
+    createSectionRoot,
   };
 }
-
-export default SectionRoot;

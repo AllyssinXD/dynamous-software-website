@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import gsap from "gsap";
-import useWindowWidth from "@/app/hooks/useWindowWidth";
+import useWindowWidth from "@/hooks/useWindowWidth";
 import { AppContext } from "../ThemeController/AppController";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -36,8 +36,8 @@ export default function HeroSection({}: Props) {
   useEffect(() => {
     const isMobile = innerWidth <= 600;
 
-    const numberOfLayers = isMobile ? 4 : 5;
-    const numberPerLayer = isMobile ? 4 : 5;
+    const numberOfLayers = isMobile ? 3 : 5;
+    const numberPerLayer = isMobile ? 3 : 5;
 
     const minRadius = isMobile ? 300 : 420;
     const maxRadius = isMobile ? 400 : 590;
@@ -90,14 +90,6 @@ export default function HeroSection({}: Props) {
       x: 700,
       y: 300,
     },
-    {
-      x: 700,
-      y: 300,
-    },
-    {
-      x: 700,
-      y: 300,
-    },
   ]);
 
   useLayoutEffect(() => {
@@ -111,7 +103,7 @@ export default function HeroSection({}: Props) {
     gsap.fromTo(
       ".details",
       {
-        scale: 2,
+        scale: innerWidth > 600 ? 2 : 3,
       },
       {
         scale: 1,
@@ -138,7 +130,6 @@ export default function HeroSection({}: Props) {
         const newCords = await generateCoordinates();
         blurs[index].x = newCords.x;
         blurs[index].y = newCords.y;
-        console.log(newCords);
         setBlurs((prev) => {
           const updated = [...prev];
           updated[index] = { ...updated[index], ...newCords };
@@ -149,7 +140,7 @@ export default function HeroSection({}: Props) {
   }, []);
 
   return (
-    <header className="hero mt-24 d:mt-32">
+    <header className="hero w-full overflow-hidden mt-16 md:pt-32 d:mt-32">
       <div className="container p-2 md:p-0 overflow-hidden md:overflow-visible relative md:flex items-center mx-auto">
         {appContext?.fancy &&
           blurs.map(({ x, y }, i) => {
@@ -168,7 +159,7 @@ export default function HeroSection({}: Props) {
               ></div>
             );
           })}
-        <div className="relative z-1 content md:w-6/9 opacity-0 -translate-x-50 h-[460px] flex flex-col justify-around mb-24">
+        <div className="relative z-1 content md:w-6/9 opacity-0 -translate-x-50 h-96 mb-32 md:mb-0  md:h-[460px] flex flex-col justify-around mb-24">
           <h1 className="text-[3rem] xl:text-[4.3rem] font-bold">
             Criamos WebApps, Sites, Chatbots e mais.
           </h1>
@@ -177,11 +168,24 @@ export default function HeroSection({}: Props) {
             ajudar a alcançar seus objetivos.
           </p>
           <div className="mt-12 flex w-full gap-5">
-            <Button label="Nos contate" className="" />
+            <Button
+              label="Nos contate"
+              className=""
+              onClick={() => {
+                document
+                  .querySelector(".cta-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+            />
             <Button
               label="Explore mais"
               className="min-w-64"
               isSecondary={true}
+              onClick={() => {
+                document
+                  .querySelector(".service-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
             />
           </div>
         </div>
@@ -201,7 +205,7 @@ export default function HeroSection({}: Props) {
             }}
             className="absolute z-[-2] bottom-[0px] left-[-140px] md:min-w-[580px] md:min-h-[600px] rounded-[50%]"
           ></div>
-          <div className="md:block absolute z-[-26] overflow-hidden left-0 bottom-0 min-h-64  md:overflow-visible w-full md:min-w-[640px] md:left-[-120px] md:top-[-100px] md:min-h-[660px]">
+          <div className="md:block absolute z-[-26] overflow-hidden left-0 bottom-0 min-h-96  md:overflow-visible w-full md:min-w-[640px] md:left-[-120px] md:top-[-100px] md:min-h-[660px]">
             <div className="relative details">
               {appContext?.fancy &&
                 details.map((detail, i) => (
@@ -247,7 +251,7 @@ function RotatingCirclesDetails({
         style={{
           borderRadius: "50%",
           opacity: "0.25",
-          background: `conic-gradient(var(--color-foreground) ${progress}deg, 0,transparent 0%)`,
+          background: `conic-gradient(var(--color-secondary) ${progress}deg, 0,transparent 0%)`,
           width: radius + "px",
           height: radius + "px",
           rotate: angle + "deg",

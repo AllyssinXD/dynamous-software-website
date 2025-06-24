@@ -6,7 +6,10 @@
   --color-background: #ffffff;
   --color-foreground: #161737;
   --color-complementary: #FFFFFF;
-  --color-shadows: #161737; 
+  --color-shadows: #161737;
+  --color-dark: #161737;
+  --color-secondary-100: #02d1c0aa;
+  --color-secondary-000: #02d1c011;
 }
 
 :root {
@@ -18,6 +21,8 @@
   --color-background: #0C0D24;
   --color-complementary: #161737; 
   --color-foreground: #d9d9d9;
+
+  
 }
 
 .bright{

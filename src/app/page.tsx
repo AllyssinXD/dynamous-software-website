@@ -1,11 +1,9 @@
-import { Basics } from "./components/Basics";
-import SectionTitle from "./components/Basics/SectionTitle";
-import DoubleContent from "./components/DoubleContent/DoubleContent";
-import FAQSection from "./components/FAQSection/FAQSection";
-import HeroSection from "./components/HeroSection/HeroSection";
-import { MouseGlow } from "./components/MouseGlow/MouseGlow";
-import ProjectsSection from "./components/ProjectsSection/ProjectsSection";
-import ServicesSection from "./components/ServicesSection/ServicesSection";
+import AboutSection from "@/components/AboutSection/AboutSection";
+import FAQSection from "../components/FAQSection/FAQSection";
+import HeroSection from "../components/HeroSection/HeroSection";
+import ProjectsSection from "../components/ProjectsSection/ProjectsSection";
+import ServicesSection from "../components/ServicesSection/ServicesSection";
+import CTASection from "@/components/CTASection/CTASection";
 
 export default function Home() {
   return (
@@ -14,6 +12,8 @@ export default function Home() {
       <ServicesSection />
       <FAQSection />
       <ProjectsSection />
+      <AboutSection />
+      <CTASection />
     </>
   );
 }

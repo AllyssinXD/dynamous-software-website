@@ -14,6 +14,5 @@ export default function SimpleSectionRoot({
   containerClass?: string;
   className?: string;
 }) {
-  return SectionRoot({ title, subtitle, children, containerClass, className })
-    .element;
+  return SectionRoot({ title, subtitle, children, containerClass, className });
 }

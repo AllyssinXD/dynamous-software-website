@@ -7,9 +7,8 @@ import style from "./serviceSection.module.css";
 import SimpleSectionRoot from "../Basics/SimpleSectionRoot";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import useWindowWidth from "@/app/hooks/useWindowWidth";
+import useWindowWidth from "@/hooks/useWindowWidth";
 import Carrosel from "../Basics/Carrosel";
-
 interface ServiceCard {
   label: string;
   link: string;
@@ -72,7 +71,7 @@ function ServicesSection() {
       containerClass="service-section opacity-0 overflow-hidden"
       title="O que podemos oferecer :"
       subtitle="Serviços"
-      className="shadow-t-10 shadow-complementary"
+      className="shadow-[0px_-10px_10px_0px] shadow-background"
     >
       <Carrosel
         listClass={style.list}

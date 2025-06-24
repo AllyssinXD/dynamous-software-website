@@ -1,6 +1,6 @@
 "use client";
 
-import useWindowWidth from "@/app/hooks/useWindowWidth";
+import useWindowWidth from "@/hooks/useWindowWidth";
 import { ReactElement, useState } from "react";
 
 function Carrosel({
