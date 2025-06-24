@@ -8,7 +8,7 @@ function SectionSubtitle({
   children: ReactNode;
 }) {
   return (
-    <h3 className="block text-[1.6rem] tracking-widest font-[300]">
+    <h3 id={id} className="block text-[1.6rem] tracking-widest font-[300]">
       {children}
     </h3>
   );

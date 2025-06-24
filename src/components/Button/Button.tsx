@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ReactNode } from "react";
 
 export interface Props {
@@ -5,7 +6,6 @@ export interface Props {
   label: string;
   className: string;
   icon?: {
-    className: string;
     element: ReactNode;
   };
   isSecondary?: boolean;
@@ -33,6 +33,7 @@ function Button({
         !vanilla ? "flex justify-center items-center text-center font-bold" : ""
       }`}
     >
+      {icon && icon.element}
       {children}
       <span>{label}</span>
     </button>

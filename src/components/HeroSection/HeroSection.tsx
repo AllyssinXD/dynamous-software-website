@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import Button from "../Button/Button";
-import {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { AppContext } from "../ThemeController/AppController";

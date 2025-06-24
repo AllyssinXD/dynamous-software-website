@@ -31,7 +31,7 @@ function Carrosel({
         }}
         className={`${listClass} md:grid flex mt-10 grid-cols-3 md:gap-10 w-full`}
       >
-        {items.map((item, _) => item)}
+        {items.map((item) => item)}
       </div>
       <div className="md:hidden flex mt-20 justify-center">
         {items.map((_, i) => (

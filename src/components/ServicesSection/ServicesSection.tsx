@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import style from "./serviceSection.module.css";
 import SimpleSectionRoot from "../Basics/SimpleSectionRoot";
 import gsap from "gsap";

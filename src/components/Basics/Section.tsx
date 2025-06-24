@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useId } from "react";
+import { ReactNode, useId } from "react";
 import SectionTitle from "./SectionTitle";
 import SectionSubtitle from "./SectionSubtitle";
 

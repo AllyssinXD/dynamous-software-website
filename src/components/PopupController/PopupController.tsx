@@ -1,10 +1,8 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import gsap from "gsap";
 import Image from "next/image";
 import {
   createContext,
-  ReactElement,
   ReactNode,
   useContext,
   useEffect,
@@ -75,7 +73,6 @@ const Popup = ({ label, iconSrc, closable, destroy }: PopupInterface) => {
 };
 
 export default function PopupProvider({ children }: { children: ReactNode }) {
-  let [numberOfPopups, setNumberOfPopups] = useState(0);
   const [queue, setQueue] = useState<PopupInterfaceWithId[]>([]);
 
   const [visiblePopups, setVisiblePopups] = useState<PopupInterfaceWithId[]>(
