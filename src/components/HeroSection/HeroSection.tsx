@@ -8,7 +8,6 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import { AppContext } from "../ThemeController/AppController";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-interface Props {}
 interface DetailsInterface {
   radius: number;
   angle: number;
@@ -21,7 +20,7 @@ interface BlursInterface {
   y: number;
 }
 
-export default function HeroSection({}: Props) {
+export default function HeroSection() {
   const appContext = useContext(AppContext);
   const [details, setDetails] = useState<DetailsInterface[]>([]);
 
@@ -249,9 +248,9 @@ function RotatingCirclesDetails({
           width: radius + "px",
           height: radius + "px",
           rotate: angle + "deg",
-          ...({
+          ...{
             "--thickness": (radius / 620) * 7 + "px",
-          } as any), //Radius 620, Thickness 7
+          }, //Radius 620, Thickness 7
         }}
       ></div>
     </div>

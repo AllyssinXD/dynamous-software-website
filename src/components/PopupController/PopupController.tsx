@@ -16,21 +16,17 @@ interface PopupContextInterface {
 export interface PopupInterface {
   iconSrc?: string;
   label: string;
-  closable?: boolean;
   destroy?: () => void;
 }
 
 // Nome correto da constante do contexto
 const PopupContext = createContext<PopupContextInterface | null>(null);
 
-const Popup = ({ label, iconSrc, closable, destroy }: PopupInterface) => {
+const Popup = ({ label, iconSrc, destroy }: PopupInterface) => {
   const [closing, setClosing] = useState(false);
   const [starting, setStarting] = useState(true);
 
   useEffect(() => {
-    const initial = setTimeout(() => {
-      setStarting(true);
-    }, 1);
     const appearAnimationTimeout = setTimeout(() => {
       setStarting(false);
     }, 10);
