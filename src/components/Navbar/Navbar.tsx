@@ -7,10 +7,12 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeController/ThemeController";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { AppContext } from "../ThemeController/AppController";
+import { usePopup } from "../PopupController/PopupController";
 
 export default function Navbar() {
   const themeContext = useContext(ThemeContext);
   const appContext = useContext(AppContext);
+  const popup = usePopup();
 
   const innerWidth = useWindowWidth();
 
@@ -41,6 +43,7 @@ export default function Navbar() {
         {items.map((item, i) => (
           <Link
             onClick={() => {
+              popup?.addToQueue({ label: "Ainda não temos essa página." });
               setIsMenuOpen(false);
             }}
             key={i}

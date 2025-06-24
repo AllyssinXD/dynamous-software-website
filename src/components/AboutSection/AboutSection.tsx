@@ -38,7 +38,10 @@ function AboutSection() {
           <div className="md:ml-20 md:mt-0 mt-10">
             <h3 className="text-[2rem]">Nos siga!</h3>
             <ul className="mt-5 md:mt-0">
-              <Link href={"https://instagram.com"} className="block mb-3">
+              <Link
+                href={"https://instagram.com/dynamoussoftware"}
+                className="block mb-3"
+              >
                 <Button
                   className="sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-auto w-full"
                   isSecondary={true}
@@ -58,7 +61,10 @@ function AboutSection() {
                   <span className="w-32">Instagram</span>
                 </Button>
               </Link>
-              <Link href={"https://instagram.com"} className="block mb-3">
+              <Link
+                href={"https://instagram.com/dynamoussoftware"}
+                className="block mb-3"
+              >
                 <Button
                   className="sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-auto w-full"
                   isSecondary={true}
@@ -78,7 +84,10 @@ function AboutSection() {
                   <span className="w-32">Youtube</span>
                 </Button>
               </Link>
-              <Link href={"https://instagram.com"} className="block mb-3">
+              <Link
+                href={"https://instagram.com/dynamoussoftware"}
+                className="block mb-3"
+              >
                 <Button
                   className="group sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-auto w-full"
                   isSecondary={true}

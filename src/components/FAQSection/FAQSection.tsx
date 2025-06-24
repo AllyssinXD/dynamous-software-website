@@ -26,7 +26,7 @@ function FAQSection() {
           opacity: 1,
           scrollTrigger: {
             trigger: ".faq-question" + i,
-            start: "top 900px",
+            start: "top 600px",
             end: "bottom 0px",
             scrub: true,
           },
