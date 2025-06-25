@@ -1,7 +1,4 @@
-import { useCustomSection } from "@/hooks/useCustomSection";
 import { ReactElement, ReactNode } from "react";
-import SectionTitle from "../Basics/SectionTitle";
-import SectionSubtitle from "../Basics/SectionSubtitle";
 
 function DoubleContent({
   right: Right,
@@ -10,8 +7,6 @@ function DoubleContent({
   right: ReactElement;
   left: ReactElement;
 }) {
-  const section = useCustomSection();
-
   return (
     <div className="md:grid md:grid-cols-2 justify-between">
       <ContentSide>{Left}</ContentSide>

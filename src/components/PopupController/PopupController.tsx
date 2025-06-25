@@ -140,6 +140,8 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
 
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
+        const target = e.target as HTMLElement;
+
         const analyticsData = {
           ip,
           country: "Brasil",
@@ -147,7 +149,7 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           page: window.location.pathname,
-          elementClicked: "botao_orcamento",
+          elementClicked: target.tagName + (target.id ? `#${target.id}` : ""),
         };
 
         fetch("/api/analytics", {
