@@ -115,7 +115,6 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
   }, [getInfoEnding]);
 
   useEffect(() => {
-    console.log(getInfo);
     if (getInfo !== true) return;
 
     const handleClick = async (e: MouseEvent) => {
