@@ -9,7 +9,6 @@ import {
 import AppProvider from "../components/ThemeController/AppController";
 import Head from "next/head";
 import PopupProvider from "@/components/PopupController/PopupController";
-
 const axiformaRegular = localFont({
   src: [
     {

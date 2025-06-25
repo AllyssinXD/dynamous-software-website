@@ -13,18 +13,10 @@ function DoubleContent({
   const section = useCustomSection();
 
   return (
-    <section.createSectionRoot>
-      <div className="md:grid md:grid-cols-2 justify-between">
-        <ContentSide>
-          <SectionSubtitle id={section.subtitleID}>FAQ</SectionSubtitle>
-          <SectionTitle id={section.titleID}>
-            Perguntas mais frequentes sobre Software
-          </SectionTitle>
-          {Left}
-        </ContentSide>
-        <ContentSide>{Right}</ContentSide>
-      </div>
-    </section.createSectionRoot>
+    <div className="md:grid md:grid-cols-2 justify-between">
+      <ContentSide>{Left}</ContentSide>
+      <ContentSide>{Right}</ContentSide>
+    </div>
   );
 }
 

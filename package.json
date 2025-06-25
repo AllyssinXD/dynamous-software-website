@@ -12,6 +12,7 @@
     "@next/font": "^14.2.15",
     "framer-motion": "^12.19.1",
     "gsap": "^3.13.0",
+    "mongoose": "^8.16.0",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

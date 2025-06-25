@@ -25,6 +25,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setDarkMode(localStorage.getItem("dark-mode") == "0" ? false : true);
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+    });
   }, []);
 
   return (
