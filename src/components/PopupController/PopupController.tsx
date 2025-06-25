@@ -111,7 +111,7 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => setInfoHidden(true), 1000);
+    if (getInfo !== null) setTimeout(() => setInfoHidden(true), 1000);
   }, [getInfoEnding]);
 
   useEffect(() => {
