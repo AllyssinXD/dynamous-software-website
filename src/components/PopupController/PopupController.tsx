@@ -183,7 +183,9 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
       <div
         style={{ transition: "1s" }}
         className={`${
-          getInfo === null && (getInfoStarting || getInfoEnding)
+          getInfo === null && getInfoStarting
+            ? "translate-y-100"
+            : getInfoEnding
             ? "translate-y-100"
             : ""
         } ${
