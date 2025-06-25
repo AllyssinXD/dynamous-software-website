@@ -111,7 +111,13 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (getInfo !== null) setTimeout(() => setInfoHidden(true), 1000);
+    if (getInfo !== null)
+      setTimeout(() => {
+        setInfoHidden(true);
+        addToQueue({
+          label: "Obrigado!",
+        });
+      }, 1000);
   }, [getInfoEnding]);
 
   useEffect(() => {
@@ -183,9 +189,9 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
         style={{ transition: "1s" }}
         className={`${
           getInfo === null && getInfoStarting
-            ? "translate-y-100"
+            ? "translate-y-600 md:translate-y-100"
             : getInfoEnding
-            ? "translate-y-100"
+            ? "translate-y-600 md:translate-y-100"
             : ""
         } ${
           getInfo === null && (!getInfoStarting || !getInfoEnding)
@@ -193,11 +199,11 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
             : ""
         } ${
           infoHidden ? "hidden" : ""
-        } fixed bg-complementary z-600 shadow-[0px_10px_10px_0px] shadow-complementary bottom-0 right-0 left-0 h-96`}
+        } fixed bg-background z-600 shadow-[0px_10px_10px_0px] shadow-complementary bottom-0 right-0 left-0 h-screen md:h-96`}
       >
         <SimpleSectionRoot
           title="Bem-vindo ao nosso site! Podemos te pedir um favor?"
-          containerClass="py-0"
+          containerClass="pt-64 md:pt-0"
           className="py-0"
         >
           <DoubleContent
@@ -208,7 +214,7 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
               </p>
             }
             right={
-              <div className="flex flex-col justify-between items-end">
+              <div className="flex flex-col justify-between md:items-end mt-10 md:0">
                 <Button
                   className="w-64 mb-5"
                   label="Sim!"
@@ -221,6 +227,7 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
                 <Button
                   label="Não, obrigado."
                   className="w-64"
+                  isSecondary
                   onClick={() => {
                     setInfoEnding(true);
                     setGetInfo(false);
