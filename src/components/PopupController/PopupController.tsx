@@ -22,7 +22,6 @@ export interface PopupInterface {
   destroy?: () => void;
 }
 
-// Nome correto da constante do contexto
 const PopupContext = createContext<PopupContextInterface | null>(null);
 
 const Popup = ({ label, iconSrc, destroy }: PopupInterface) => {
@@ -36,10 +35,8 @@ const Popup = ({ label, iconSrc, destroy }: PopupInterface) => {
     const closeAnimationTimeout = setTimeout(() => {
       setClosing(true);
     }, 4800);
-
     const timeout = setTimeout(() => {
-      console.log("DESTRUINDO");
-      destroy!();
+      destroy?.();
     }, 5000);
 
     return () => {
@@ -57,7 +54,7 @@ const Popup = ({ label, iconSrc, destroy }: PopupInterface) => {
           : "translate-x-[0px] md:-translate-x-[200px]"
       } transition mb-5 max-w-[300px] md:min-w-[300px] rounded-sm p-3 bg-secondary text-dark`}
     >
-      {iconSrc ? (
+      {iconSrc && (
         <Image
           src={iconSrc}
           alt={label}
@@ -65,7 +62,7 @@ const Popup = ({ label, iconSrc, destroy }: PopupInterface) => {
           height={300}
           className="w-8 h-8"
         />
-      ) : null}
+      )}
       <span>{label}</span>
     </motion.div>
   );
@@ -100,78 +97,69 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
       setVisiblePopups((prev) => [...prev, ...toShow]);
       setQueue((prev) => prev.slice(toShow.length));
     }
-  }, [queue]);
+  }, [queue, visiblePopups]);
 
   useEffect(() => {
-    if (getInfo) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-      });
-    } else if (getInfo != null) {
-      setInfoEnding(true);
-      setTimeout(() => setInfoHidden(true), 1000);
-    }
-
-    localStorage.setItem(
-      "sharingInfo",
-      getInfo ? "S" : getInfo != null ? "N" : "null"
-    );
-  }, [getInfo]);
-
-  useEffect(() => {
-    setGetInfo(
-      localStorage.getItem("sharingInfo") == "S"
-        ? true
-        : localStorage.getItem("sharingInfo") == "N"
-        ? false
-        : null
-    );
-
-    if (getInfo == null) setInfoHidden(true);
+    const savedInfo = localStorage.getItem("sharingInfo");
+    const consent = savedInfo === "S" ? true : savedInfo === "N" ? false : null;
+    setGetInfo(consent);
+    if (consent === null) setInfoHidden(false);
 
     setTimeout(() => {
       setInfoStarting(false);
     }, 1000);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => setInfoHidden(true), 1000);
+  }, [getInfoEnding]);
+
+  useEffect(() => {
+    console.log(getInfo);
+    if (getInfo !== true) return;
 
     const handleClick = async (e: MouseEvent) => {
-      const ip = await fetch("https://api.ipify.org?format=json")
-        .then((res) => res.json())
-        .then((data) => data.ip);
+      try {
+        const ip = await fetch("https://api.ipify.org?format=json")
+          .then((res) => res.json())
+          .then((data) => data.ip);
 
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-        const target = e.target as HTMLElement;
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const target = e.target as HTMLElement;
 
-        const analyticsData = {
-          ip,
-          country: "Brasil",
-          city: "Embu das Artes",
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          page: window.location.pathname,
-          elementClicked: target.tagName + (target.id ? `#${target.id}` : ""),
-        };
+            const analyticsData = {
+              ip,
+              country: "Brasil",
+              city: "Embu das Artes",
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              page: window.location.pathname,
+              elementClicked:
+                target.tagName +
+                (target.id ? `#${target.id}` : target.className),
+            };
 
-        fetch("/api/analytics", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(analyticsData),
-        })
-          .then(() => {
-            console.log("Sucesso!");
-          })
-          .catch(() => {
-            console.log("Bah");
-          });
-      });
+            fetch("/api/analytics", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(analyticsData),
+            });
+          },
+          (error) => {
+            console.warn("Geolocalização não permitida:", error.message);
+          }
+        );
+      } catch (err) {
+        console.error("Erro ao obter IP:", err);
+      }
     };
 
     window.addEventListener("click", handleClick);
-
     return () => {
       window.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [getInfo]);
 
   return (
     <PopupContext.Provider value={{ addToQueue }}>
@@ -190,16 +178,20 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
           ))}
         </div>
       </AnimatePresence>
+
+      {/* Banner de permissão */}
       <div
-        style={{
-          transition: "1s",
-        }}
+        style={{ transition: "1s" }}
         className={`${
-          getInfo == null && (getInfoStarting || getInfoEnding)
+          getInfo === null && (getInfoStarting || getInfoEnding)
             ? "translate-y-100"
-            : null
-        } ${getInfo == null && !getInfoStarting ? "translate-y-0" : null} ${
-          infoHidden && "hidden"
+            : ""
+        } ${
+          getInfo === null && (!getInfoStarting || !getInfoEnding)
+            ? "translate-y-0"
+            : ""
+        } ${
+          infoHidden ? "hidden" : ""
         } fixed bg-complementary z-600 shadow-[0px_10px_10px_0px] shadow-complementary bottom-0 right-0 left-0 h-96`}
       >
         <SimpleSectionRoot
@@ -222,6 +214,7 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
                   onClick={() => {
                     setInfoEnding(true);
                     setGetInfo(true);
+                    localStorage.setItem("sharingInfo", "S");
                   }}
                 />
                 <Button
@@ -229,7 +222,8 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
                   className="w-64"
                   onClick={() => {
                     setInfoEnding(true);
-                    setGetInfo(true);
+                    setGetInfo(false);
+                    localStorage.setItem("sharingInfo", "N");
                   }}
                 />
               </div>
@@ -244,6 +238,5 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
 
 // Hook para acessar o contexto
 export function usePopup() {
-  const context = useContext(PopupContext);
-  return context;
+  return useContext(PopupContext);
 }
