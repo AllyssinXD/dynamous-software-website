@@ -43,7 +43,7 @@ function AboutSection() {
                 className="block mb-3"
               >
                 <Button
-                  className="sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-auto w-full"
+                  className="sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-64 flex items-center justify-center md:justify-start w-full"
                   isSecondary={true}
                   label=""
                 >
@@ -66,7 +66,7 @@ function AboutSection() {
                 className="block mb-3"
               >
                 <Button
-                  className="sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-auto w-full"
+                  className="sm:py-1 h-12 sm:pl-2 sm:pr-12 flex items-center justify-center md:justify-start md:w-auto w-full"
                   isSecondary={true}
                   label=""
                 >
@@ -89,7 +89,7 @@ function AboutSection() {
                 className="block mb-3"
               >
                 <Button
-                  className="group sm:py-1 h-12 sm:pl-2 sm:pr-12 md:w-auto w-full"
+                  className="group sm:py-1 h-12 sm:pl-2 sm:pr-12 flex items-center justify-center md:justify-start md:w-auto w-full"
                   isSecondary={true}
                   label=""
                 >

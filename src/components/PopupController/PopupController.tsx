@@ -69,13 +69,12 @@ const Popup = ({ label, iconSrc, destroy }: PopupInterface) => {
 };
 
 export default function PopupProvider({ children }: { children: ReactNode }) {
-  const [queue, setQueue] = useState<PopupInterfaceWithId[]>([]);
+  type PopupInterfaceWithId = PopupInterface & { id: string };
 
+  const [queue, setQueue] = useState<PopupInterfaceWithId[]>([]);
   const [visiblePopups, setVisiblePopups] = useState<PopupInterfaceWithId[]>(
     []
   );
-
-  type PopupInterfaceWithId = PopupInterface & { id: string };
 
   const addToQueue = (popup: PopupInterface) => {
     const popupWithId = { ...popup, id: Date.now().toString() };
