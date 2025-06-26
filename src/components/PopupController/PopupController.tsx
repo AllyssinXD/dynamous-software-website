@@ -102,8 +102,12 @@ export default function PopupProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const savedInfo = localStorage.getItem("sharingInfo");
     const consent = savedInfo === "S" ? true : savedInfo === "N" ? false : null;
+
     setGetInfo(consent);
-    if (consent === null) setInfoHidden(false);
+    if (consent !== null) setInfoHidden(true);
+    else setInfoHidden(false);
+
+    console.log(consent);
 
     setTimeout(() => {
       setInfoStarting(false);
